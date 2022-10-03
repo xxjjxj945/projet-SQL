@@ -1,0 +1,9 @@
+select offices.country , sum(quantityOrdered*priceEach)
+from offices
+join employees on offices.officeCode=employees.officeCode
+join customers on employees.employeeNumber=customers.salesRepEmployeeNumber
+join orders on customers.customerNumber=orders.customerNumber
+join orderdetails on orders.orderNumber=orderdetails.orderNumber
+where shippedDate >='2022-07-01' and shippedDate <='2022-08-31' 
+group by offices.country
+order by sum(quantityOrdered*priceEach) desc;
